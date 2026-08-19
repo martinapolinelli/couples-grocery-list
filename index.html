@@ -37,7 +37,7 @@ const firebaseConfig = {
   window.dispatchEvent(new Event('firebase-ready'));
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#F1EAD6;
@@ -55,8 +55,10 @@ const firebaseConfig = {
   html,body{margin:0;padding:0;}
   body{
     background:
-      radial-gradient(circle at 8% 12%, rgba(140,115,152,0.08) 0, transparent 45%),
-      radial-gradient(circle at 92% 85%, rgba(217,164,65,0.10) 0, transparent 45%),
+      repeating-linear-gradient(0deg, rgba(140,115,152,0.05) 0 2px, transparent 2px 34px),
+      repeating-linear-gradient(90deg, rgba(217,164,65,0.06) 0 2px, transparent 2px 34px),
+      radial-gradient(circle at 8% 10%, rgba(140,115,152,0.10) 0, transparent 40%),
+      radial-gradient(circle at 94% 88%, rgba(217,164,65,0.13) 0, transparent 42%),
       var(--bg);
     font-family:'Nunito', sans-serif;
     color:var(--ink);
@@ -71,12 +73,22 @@ const firebaseConfig = {
   }
   header{
     text-align:center;
-    margin-bottom:18px;
+    margin-bottom:22px;
     position:relative;
+    padding-top:8px;
   }
+  .sprig{
+    position:absolute;
+    top:-6px;
+    width:52px;
+    height:52px;
+    opacity:0.75;
+  }
+  .sprig-left{ left:6%; transform:rotate(-18deg) scaleX(-1); }
+  .sprig-right{ right:6%; transform:rotate(18deg); }
   h1{
     font-family:'Caveat', cursive;
-    font-size:54px;
+    font-size:56px;
     font-weight:700;
     margin:0;
     color:var(--ink);
@@ -90,14 +102,17 @@ const firebaseConfig = {
     filter:saturate(0.9);
   }
   .subtitle{
-    font-size:13px;
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:14px;
     color:var(--witchy);
-    margin-top:2px;
-    letter-spacing:0.04em;
-    font-weight:600;
+    margin-top:4px;
+    letter-spacing:0.02em;
+    font-weight:400;
   }
   .subtitle::before, .subtitle::after{
     content:'✿';
+    font-family:'Nunito',sans-serif;
     color:var(--accent);
     font-size:10px;
     margin:0 8px;
@@ -149,35 +164,69 @@ const firebaseConfig = {
     background:var(--accent);
     color:#fff;
     border:none;
-    border-radius:50% 45% 50% 48%;
+    border-radius:50%;
     width:48px;
+    height:48px;
     padding:0;
     font-size:22px;
     font-weight:700;
     cursor:pointer;
-    transition:background 0.15s ease, transform 0.1s ease;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
     line-height:1;
+    position:relative;
+    box-shadow:
+      0 -19px 0 -13px var(--accent),
+      13px -14px 0 -13px var(--accent),
+      19px 0 0 -13px var(--accent),
+      13px 14px 0 -13px var(--accent),
+      0 19px 0 -13px var(--accent),
+      -13px 14px 0 -13px var(--accent),
+      -19px 0 0 -13px var(--accent),
+      -13px -14px 0 -13px var(--accent);
   }
   .add-form button:active{
-    transform:scale(0.94) rotate(-6deg);
+    transform:scale(0.92) rotate(-8deg);
   }
   .add-form button:hover{
     background:var(--witchy);
+    box-shadow:
+      0 -19px 0 -13px var(--witchy),
+      13px -14px 0 -13px var(--witchy),
+      19px 0 0 -13px var(--witchy),
+      13px 14px 0 -13px var(--witchy),
+      0 19px 0 -13px var(--witchy),
+      -13px 14px 0 -13px var(--witchy),
+      -19px 0 0 -13px var(--witchy),
+      -13px -14px 0 -13px var(--witchy);
   }
   .list-card{
     background:var(--surface);
-    border-radius:20px 16px 20px 14px;
-    padding:6px 4px;
-    box-shadow:0 3px 16px rgba(60,74,46,0.08);
+    border-radius:4px;
+    padding:14px 4px 6px;
+    box-shadow:0 3px 16px rgba(60,74,46,0.10);
     border:1px solid var(--line);
+    border-top:none;
     min-height:80px;
+    position:relative;
+    margin-top:14px;
+  }
+  .list-card::before{
+    content:'';
+    position:absolute;
+    top:-11px;
+    left:0;
+    right:0;
+    height:20px;
+    background:
+      radial-gradient(circle at 10px 10px, transparent 10px, var(--surface) 10.5px) 0 -3px / 20px 20px repeat-x;
+    filter:drop-shadow(0 -2px 4px rgba(60,74,46,0.06));
   }
   .item{
     display:flex;
     align-items:center;
     gap:12px;
     padding:13px 14px;
-    border-bottom:1px solid var(--line);
+    border-bottom:1px dashed var(--line);
     position:relative;
   }
   .item:last-child{
@@ -292,26 +341,27 @@ const firebaseConfig = {
     flex-direction:column;
     gap:10px;
     background:var(--surface);
-    padding:20px;
-    border-radius:18px;
-    box-shadow:0 2px 14px rgba(43,67,57,0.06);
+    padding:22px 20px;
+    border-radius:6px;
+    box-shadow:0 3px 16px rgba(60,74,46,0.10);
+    border:1px dashed var(--witchy);
   }
   .login-screen input{
     border:2px solid var(--line);
-    border-radius:12px;
+    border-radius:10px;
     padding:12px 14px;
     font-size:15px;
     font-family:'Nunito',sans-serif;
     outline:none;
   }
   .login-screen input:focus{
-    border-color:var(--accent);
+    border-color:var(--witchy);
   }
   .login-screen button{
     background:var(--accent);
     color:#fff;
     border:none;
-    border-radius:12px;
+    border-radius:10px;
     padding:12px;
     font-size:15px;
     font-weight:700;
@@ -319,7 +369,7 @@ const firebaseConfig = {
     font-family:'Nunito',sans-serif;
   }
   .login-screen button:hover{
-    background:var(--accent-dark);
+    background:var(--witchy);
   }
   .login-error{
     color:var(--danger);
@@ -351,7 +401,19 @@ const firebaseConfig = {
  
 <div class="app" id="appScreen" style="display:none;">
   <header>
+    <svg class="sprig sprig-left" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 55 Q 20 40 15 20 Q 12 8 25 5" stroke="#9AAE6F" stroke-width="2.5" stroke-linecap="round"/>
+      <ellipse cx="17" cy="18" rx="6" ry="3.5" fill="#8C7398" transform="rotate(-30 17 18)"/>
+      <ellipse cx="24" cy="8" rx="6" ry="3.5" fill="#D9A441" transform="rotate(10 24 8)"/>
+      <ellipse cx="8" cy="35" rx="5" ry="3" fill="#9AAE6F" transform="rotate(-50 8 35)"/>
+    </svg>
     <h1>Lista Spesa<span class="cart-emoji">🛒</span></h1>
+    <svg class="sprig sprig-right" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 55 Q 20 40 15 20 Q 12 8 25 5" stroke="#9AAE6F" stroke-width="2.5" stroke-linecap="round"/>
+      <ellipse cx="17" cy="18" rx="6" ry="3.5" fill="#8C7398" transform="rotate(-30 17 18)"/>
+      <ellipse cx="24" cy="8" rx="6" ry="3.5" fill="#D9A441" transform="rotate(10 24 8)"/>
+      <ellipse cx="8" cy="35" rx="5" ry="3" fill="#9AAE6F" transform="rotate(-50 8 35)"/>
+    </svg>
     <div class="subtitle">condivisa e aggiornata</div>
     <div class="name-row">
       <span id="whoami">Stai scrivendo come <strong id="whoamiName">...</strong></span>
