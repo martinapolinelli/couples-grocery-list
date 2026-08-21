@@ -37,28 +37,43 @@ const firebaseConfig = {
   window.dispatchEvent(new Event('firebase-ready'));
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,700;1,900&family=Nunito:wght@400;500;600;700;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#F1EAD6;
-    --surface:#FFFCF3;
-    --ink:#3C4A2E;
-    --ink-soft:#75805F;
-    --accent:#D9A441;
-    --accent-dark:#B9812A;
-    --done:#9AAE6F;
-    --danger:#B15A3A;
-    --witchy:#8C7398;
-    --line: rgba(60,74,46,0.13);
+    --bg:#F4F1F4;
+    --surface:#FFFFFF;
+    --ink:#181318;
+    --ink-soft:#6E6373;
+    --accent:#9E6EB8;
+    --accent-dark:#71468C;
+    --done:#7FAE8C;
+    --danger:#B87A9A;
+    --witchy:#C9A3DC;
+    --line: rgba(24,19,24,0.22);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#161217;
+      --surface:#211C24;
+      --ink:#F4F1F4;
+      --ink-soft:#B3A9BB;
+      --accent:#C9A3DC;
+      --accent-dark:#E0C4EE;
+      --done:#9FCBAA;
+      --danger:#E3A9C4;
+      --witchy:#C9A3DC;
+      --line: rgba(244,241,244,0.22);
+    }
   }
   *{box-sizing:border-box;}
+  html{color-scheme:light dark; background:var(--bg);}
   html,body{margin:0;padding:0;}
   body{
     background:
-      repeating-linear-gradient(0deg, rgba(140,115,152,0.05) 0 2px, transparent 2px 34px),
-      repeating-linear-gradient(90deg, rgba(217,164,65,0.06) 0 2px, transparent 2px 34px),
-      radial-gradient(circle at 8% 10%, rgba(140,115,152,0.10) 0, transparent 40%),
-      radial-gradient(circle at 94% 88%, rgba(217,164,65,0.13) 0, transparent 42%),
+      repeating-linear-gradient(0deg, rgba(24,19,24,0.05) 0 1.5px, transparent 1.5px 30px),
+      repeating-linear-gradient(90deg, rgba(24,19,24,0.05) 0 1.5px, transparent 1.5px 30px),
+      radial-gradient(circle at 6% 8%, rgba(158,110,184,0.16) 0, transparent 40%),
+      radial-gradient(circle at 95% 90%, rgba(127,174,140,0.18) 0, transparent 42%),
       var(--bg);
     font-family:'Nunito', sans-serif;
     color:var(--ink);
@@ -75,24 +90,16 @@ const firebaseConfig = {
     text-align:center;
     margin-bottom:22px;
     position:relative;
-    padding-top:8px;
+    padding-top:6px;
   }
-  .sprig{
-    position:absolute;
-    top:-6px;
-    width:52px;
-    height:52px;
-    opacity:0.75;
-  }
-  .sprig-left{ left:6%; transform:rotate(-18deg) scaleX(-1); }
-  .sprig-right{ right:6%; transform:rotate(18deg); }
   h1{
-    font-family:'Caveat', cursive;
-    font-size:56px;
-    font-weight:700;
+    font-family:'Bodoni Moda', serif;
+    font-style:italic;
+    font-weight:900;
+    font-size:50px;
     margin:0;
     color:var(--ink);
-    transform:rotate(-2deg);
+    letter-spacing:-0.01em;
     display:inline-block;
   }
   .cart-emoji{
@@ -106,14 +113,23 @@ const firebaseConfig = {
     font-style:italic;
     font-size:14px;
     color:var(--witchy);
-    margin-top:4px;
-    letter-spacing:0.02em;
+    margin-top:6px;
+    letter-spacing:0.03em;
     font-weight:400;
   }
-  .subtitle::before, .subtitle::after{
+  .subtitle::before{
     content:'✿';
     font-family:'Nunito',sans-serif;
     color:var(--accent);
+    font-size:10px;
+    margin:0 8px;
+    position:relative;
+    top:-2px;
+  }
+  .subtitle::after{
+    content:'✿';
+    font-family:'Nunito',sans-serif;
+    color:var(--done);
     font-size:10px;
     margin:0 8px;
     position:relative;
@@ -146,7 +162,7 @@ const firebaseConfig = {
   }
   .add-form input{
     flex:1;
-    border:2px dashed var(--line);
+    border:2px dashed var(--ink);
     background:var(--surface);
     border-radius:16px 14px 18px 12px;
     padding:13px 16px;
@@ -157,11 +173,11 @@ const firebaseConfig = {
     transition:border-color 0.15s ease;
   }
   .add-form input:focus{
-    border-color:var(--witchy);
+    border-color:var(--accent);
     border-style:solid;
   }
   .add-form button{
-    background:var(--accent);
+    background:var(--ink);
     color:#fff;
     border:none;
     border-radius:50%;
@@ -171,55 +187,33 @@ const firebaseConfig = {
     font-size:22px;
     font-weight:700;
     cursor:pointer;
-    transition:transform 0.15s ease, box-shadow 0.15s ease;
+    transition:transform 0.15s ease;
     line-height:1;
     position:relative;
     box-shadow:
       0 -19px 0 -13px var(--accent),
-      13px -14px 0 -13px var(--accent),
+      13px -14px 0 -13px var(--done),
       19px 0 0 -13px var(--accent),
-      13px 14px 0 -13px var(--accent),
+      13px 14px 0 -13px var(--done),
       0 19px 0 -13px var(--accent),
-      -13px 14px 0 -13px var(--accent),
+      -13px 14px 0 -13px var(--done),
       -19px 0 0 -13px var(--accent),
-      -13px -14px 0 -13px var(--accent);
+      -13px -14px 0 -13px var(--done);
   }
   .add-form button:active{
     transform:scale(0.92) rotate(-8deg);
   }
   .add-form button:hover{
-    background:var(--witchy);
-    box-shadow:
-      0 -19px 0 -13px var(--witchy),
-      13px -14px 0 -13px var(--witchy),
-      19px 0 0 -13px var(--witchy),
-      13px 14px 0 -13px var(--witchy),
-      0 19px 0 -13px var(--witchy),
-      -13px 14px 0 -13px var(--witchy),
-      -19px 0 0 -13px var(--witchy),
-      -13px -14px 0 -13px var(--witchy);
+    background:var(--accent-dark);
   }
   .list-card{
     background:var(--surface);
-    border-radius:4px;
-    padding:14px 4px 6px;
-    box-shadow:0 3px 16px rgba(60,74,46,0.10);
-    border:1px solid var(--line);
-    border-top:none;
+    border-radius:16px;
+    padding:6px 4px;
+    box-shadow:0 4px 18px rgba(24,19,24,0.16);
+    border:1.5px solid var(--ink);
     min-height:80px;
     position:relative;
-    margin-top:14px;
-  }
-  .list-card::before{
-    content:'';
-    position:absolute;
-    top:-11px;
-    left:0;
-    right:0;
-    height:20px;
-    background:
-      radial-gradient(circle at 10px 10px, transparent 10px, var(--surface) 10.5px) 0 -3px / 20px 20px repeat-x;
-    filter:drop-shadow(0 -2px 4px rgba(60,74,46,0.06));
   }
   .item{
     display:flex;
@@ -401,19 +395,7 @@ const firebaseConfig = {
  
 <div class="app" id="appScreen" style="display:none;">
   <header>
-    <svg class="sprig sprig-left" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M5 55 Q 20 40 15 20 Q 12 8 25 5" stroke="#9AAE6F" stroke-width="2.5" stroke-linecap="round"/>
-      <ellipse cx="17" cy="18" rx="6" ry="3.5" fill="#8C7398" transform="rotate(-30 17 18)"/>
-      <ellipse cx="24" cy="8" rx="6" ry="3.5" fill="#D9A441" transform="rotate(10 24 8)"/>
-      <ellipse cx="8" cy="35" rx="5" ry="3" fill="#9AAE6F" transform="rotate(-50 8 35)"/>
-    </svg>
     <h1>Lista Spesa<span class="cart-emoji">🛒</span></h1>
-    <svg class="sprig sprig-right" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M5 55 Q 20 40 15 20 Q 12 8 25 5" stroke="#9AAE6F" stroke-width="2.5" stroke-linecap="round"/>
-      <ellipse cx="17" cy="18" rx="6" ry="3.5" fill="#8C7398" transform="rotate(-30 17 18)"/>
-      <ellipse cx="24" cy="8" rx="6" ry="3.5" fill="#D9A441" transform="rotate(10 24 8)"/>
-      <ellipse cx="8" cy="35" rx="5" ry="3" fill="#9AAE6F" transform="rotate(-50 8 35)"/>
-    </svg>
     <div class="subtitle">condivisa e aggiornata</div>
     <div class="name-row">
       <span id="whoami">Stai scrivendo come <strong id="whoamiName">...</strong></span>
